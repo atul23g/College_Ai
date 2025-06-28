@@ -1,7 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
-// Temporarily disabled middleware to get build working
+// Check if Clerk environment variables are available
+const hasClerkConfig = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && 
+                      process.env.CLERK_SECRET_KEY;
+
 export default async function middleware(req: NextRequest) {
+  // During build or without Clerk config, allow all requests
+  if (!hasClerkConfig) {
+    return NextResponse.next();
+  }
+
+  // With Clerk config, allow all requests for now
+  // Authentication will be handled by Clerk components at runtime
   return NextResponse.next();
 }
 
