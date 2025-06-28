@@ -28,6 +28,32 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Check if Clerk environment variables are available
+  const hasClerkConfig = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY && 
+                        process.env.CLERK_SECRET_KEY;
+
+  if (!hasClerkConfig) {
+    // Fallback for build time when env vars aren't available
+    return (
+      <html lang="en" suppressHydrationWarning>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          suppressHydrationWarning
+        >
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </body>
+      </html>
+    );
+  }
+
   return (
     <ClerkProvider
       appearance={{
@@ -51,6 +77,5 @@ export default function RootLayout({
       </body>
     </html>
     </ClerkProvider>
-    
   );
 }
