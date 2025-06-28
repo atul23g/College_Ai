@@ -157,7 +157,6 @@ const ScratchPage = ({ onBack }: Props) => {
       </motion.div>
       <CardList
         outlines={outlines}
-        addOutline={addOutline}
         addMultipleOutlines={addMultipleOutlines}
         editingCard={editingCard}
         selectedCard={selectedCard}

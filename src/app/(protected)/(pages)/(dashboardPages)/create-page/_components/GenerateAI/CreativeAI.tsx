@@ -235,7 +235,6 @@ const handleGenerate = async () => {
 
       <CardList
         outlines={outlines}
-        addOutline={addOutlines}
         addMultipleOutlines={addMultipleOutlines}
         editingCard={editingCard}
         selectedCard={selectedCard}
